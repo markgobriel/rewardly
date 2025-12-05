@@ -1,75 +1,169 @@
-# This text file should explain how to deploy your website.
+# REWARDLY - DEPLOYMENT GUIDE
 
-# You should write detailed description on:
+## DEPLOYED APPLICATION
+Live URL: https://rewardly-frontend-production.up.railway.app/
 
-# 1. All the packages you need to install
-# 2. How to configure various servers (e.g., Nginx, Apache, etc)
+The application is deployed on Railway with:
+- Frontend: React + Vite application
+- Backend: Node.js + Express + Prisma API
+- Database: SQLite (automatically seeded on startup)
 
-# Dependencies
-## General Dependencies
-sqlite3, npm, node
+---
 
-## Frontend Dependencies
-"dependencies": {
-    "@fullcalendar/core": "^6.1.19",
-    "@fullcalendar/daygrid": "^6.1.19",
-    "@fullcalendar/react": "^6.1.19",
-    "@radix-ui/react-checkbox": "^1.3.3",
-    "@radix-ui/react-dialog": "^1.1.15",
-    "@radix-ui/react-dropdown-menu": "^2.1.16",
-    "@radix-ui/react-label": "^2.1.8",
-    "@radix-ui/react-popover": "^1.1.15",
-    "@radix-ui/react-select": "^2.2.6",
-    "@radix-ui/react-separator": "^1.1.8",
-    "@radix-ui/react-slot": "^1.2.4",
-    "@radix-ui/react-switch": "^1.2.6",
-    "@radix-ui/react-tooltip": "^1.2.8",
-    "@tailwindcss/vite": "^4.1.17",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "framer-motion": "^12.23.24",
-    "lucide-react": "^0.554.0",
-    "react": "^19.2.0",
-    "react-calendar": "^6.0.0",
-    "react-dom": "^19.2.0",
-    "react-router-dom": "^7.9.6",
-    "tailwind-merge": "^3.4.0",
-    "tailwindcss": "^4.1.17"
-}
-## Backend depenencies
-"dependencies": {
-    "@prisma/client": "^6.4.1",
-    "bcrypt": "^5.1.1",
-    "cors": "^2.8.5",
-    "express": "^4.21.2",
-    "express-jwt": "^8.5.1",
-    "jsonwebtoken": "^9.0.2",
-    "multer": "^1.4.5-lts.1",
-    "prisma": "^6.4.1",
-    "sqlite3": "^5.1.7",
-    "uuid": "^11.1.0",
-    "zod": "^3.24.2"
-}
+## LOCAL INSTALLATION & SETUP
 
-# Configureation
-To configure the servers the frontend needs VITE_BACKEND_URL set in the .env
-the backend needs FRONTEND_URL and JWT_SECRET set in the .env
+### Prerequisites
+- Node.js v25.2.1 or higher
+- npm (comes with Node.js)
+- Git
 
-Deployment over railway uses the start script
+### 1. Clone the Repository
+```bash
+git clone <repository-url>
+cd course-project
 ```
+
+### 2. Backend Setup
+
+#### Navigate to backend directory:
+```bash
+cd backend
+```
+
+#### Install dependencies:
+```bash
 npm install
-npm run build
-npx serve -s dist
 ```
-for the frontend and
-```
-npm install
-node index.js {port}
-```
-for the backend
 
-# Notes:
-The backend and frontend can run on the same machine for simplicity.
-Railway automatically provides URLs; ensure VITE_BACKEND_URL points to the backend’s public URL.
-The backend listens on the specified port; the frontend communicates via VITE_BACKEND_URL.
+The following packages will be installed:
+- express (^4.21.2) - Web framework
+- @prisma/client (^6.4.1) - Database ORM
+- prisma (^6.4.1) - Database toolkit
+- bcrypt (^5.1.1) - Password hashing
+- jsonwebtoken (^9.0.2) - JWT authentication
+- cors (^2.8.5) - Cross-origin resource sharing
+- multer (^1.4.5-lts.1) - File upload handling
+- sqlite3 (^5.1.7) - SQLite database
+- uuid (^11.1.0) - UUID generation
+- zod (^3.24.2) - Schema validation
+
+#### Environment Configuration:
+Create a `.env` file in the backend directory:
+```bash
+JWT_SECRET=your-secret-key-here
+```
+
+#### Database Setup:
+The database is automatically created and seeded when the server starts.
+It includes:
+- 12 pre-populated users (user1-user12, all with password: password123)
+- 40 events with various dates and locations
+- 30 transactions across different types
+- 10 promotions with sample data
+
+#### Start Backend Server:
+```bash
+node index.js 3000
+```
+
+The backend will run on http://localhost:3000
+
+### 3. Frontend Setup
+
+#### Navigate to frontend directory:
+```bash
+cd ../frontend
+```
+
+#### Install dependencies:
+```bash
+npm install
+```
+
+The following packages will be installed:
+- react (^19.2.0) - UI framework
+- react-router-dom - Routing
+- vite (^7.0.3) - Build tool
+- @radix-ui/* - UI component primitives
+- lucide-react (^0.554.0) - Icon library
+- @fullcalendar/* (^6.1.19) - Calendar component
+- tailwindcss (^4.1.17) - CSS framework
+- framer-motion (^12.23.24) - Animation library
+
+#### Environment Configuration:
+Create a `.env` file in the frontend directory:
+```bash
+VITE_BACKEND_URL=http://localhost:3000
+```
+
+For production (Railway), set:
+```bash
+VITE_BACKEND_URL=https://rewardly-backend-production.up.railway.app
+```
+
+#### Start Development Server:
+```bash
+npm run dev
+```
+
+The frontend will run on http://localhost:5173
+
+### 4. Access the Application
+
+#### Test Accounts:
+You can log in with any of these pre-seeded accounts:
+
+**Superuser (Admin):**
+- Username: admin01
+- Password: password123
+
+**Manager:**
+- Username: manager01
+- Password: password123
+
+**Cashier:**
+- Username: cashier01
+- Password: password123
+
+**Regular User:**
+- Username: user01, user02, user03, user04, user05
+- Password: password123
+
+---
+
+## TROUBLESHOOTING
+
+### Backend won't start:
+- Check Node.js version: `node --version` (should be v25.2.1+)
+- Ensure port 3000 is not in use: `lsof -ti:3000 | xargs kill -9`
+- Verify .env file exists with JWT_SECRET
+
+### Frontend won't connect to backend:
+- Check VITE_BACKEND_URL in frontend/.env
+- Ensure backend is running first
+- Check browser console for CORS errors
+
+### Database issues:
+- Delete `backend/prisma/dev.db` and restart backend
+- Database will be automatically recreated and seeded
+
+### Login issues:
+- Use test accounts: user1-user12 with password: password123
+- Clear browser localStorage and try again
+
+---
+
+## ARCHITECTURE
+
+### Key Features:
+- User registration and authentication
+- Role-based access control (Regular, Cashier, Manager, Superuser)
+- Event management with RSVP functionality
+- Promotion system with various types
+- Transaction tracking (purchases, redemptions, transfers, adjustments)
+- QR code generation for users
+- Points-based loyalty system
+- Calendar view of events
+- Profile management
+- Admin dashboard
 
