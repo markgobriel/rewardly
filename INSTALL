@@ -6,7 +6,10 @@
 # 2. How to configure various servers (e.g., Nginx, Apache, etc)
 
 # Dependencies
-## Frontend Depenencies
+## General Dependencies
+sqlite3, npm, node
+
+## Frontend Dependencies
 "dependencies": {
     "@fullcalendar/core": "^6.1.19",
     "@fullcalendar/daygrid": "^6.1.19",
@@ -64,4 +67,9 @@ npm install
 node index.js {port}
 ```
 for the backend
+
+# Notes:
+The backend and frontend can run on the same machine for simplicity.
+Railway automatically provides URLs; ensure VITE_BACKEND_URL points to the backend’s public URL.
+The backend listens on the specified port; the frontend communicates via VITE_BACKEND_URL.
 
