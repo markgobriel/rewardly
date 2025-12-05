@@ -31,6 +31,7 @@ try {
     console.error("Failed to seed database on start:", err.message);
 }
 
+console.log(FRONTEND_URL);
 app.use(cors({
     origin: FRONTEND_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
