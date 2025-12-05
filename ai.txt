@@ -17,3 +17,12 @@ Chifeng:
     - I also used it to give me a framework to add functionality on for Event Dashboard
     - I also used it to copy over boilerplate for tab state management as well as form state management from transaction to every other form
 - Aid in CSS work to style components and refine their visual appearance.
+
+
+Mark:
+- To generate frontend mock data before the backend was ready, so I could build and verify UI flows.
+- For a concise checklist of missing tasks and next steps to keep frontend and backend integration on track.
+  - Asking to look through the rubric/instructions and to tell me what is yet to be completed
+- For CSS suggestions and polish while iterating on page layouts and component styling.
+  - i.e. keeping a consistent theme/styling throughout the website.
+- To guide and validate CRUD testing flows for transactions, promotions, and events until the backend APIs were available.
