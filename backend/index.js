@@ -31,7 +31,7 @@ try {
 }
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
@@ -56,22 +56,22 @@ app.post("/register", async (req, res) => {
 
         // Validate required fields
         if (!username || !firstname || !lastname || !password) {
-            return res.status(400).json({ 
-                message: "All fields are required: username, firstname, lastname, password" 
+            return res.status(400).json({
+                message: "All fields are required: username, firstname, lastname, password"
             });
         }
 
         // Validate username format (utorid)
         if (username.length < 3 || username.length > 20) {
-            return res.status(400).json({ 
-                message: "Username must be between 3 and 20 characters" 
+            return res.status(400).json({
+                message: "Username must be between 3 and 20 characters"
             });
         }
 
         // Validate password strength
         if (password.length < 6) {
-            return res.status(400).json({ 
-                message: "Password must be at least 6 characters long" 
+            return res.status(400).json({
+                message: "Password must be at least 6 characters long"
             });
         }
 
@@ -81,8 +81,8 @@ app.post("/register", async (req, res) => {
         });
 
         if (existingUser) {
-            return res.status(409).json({ 
-                message: "Username already exists. Please choose a different username." 
+            return res.status(409).json({
+                message: "Username already exists. Please choose a different username."
             });
         }
 
@@ -117,8 +117,8 @@ app.post("/register", async (req, res) => {
 
     } catch (error) {
         console.error("Registration error:", error);
-        res.status(500).json({ 
-            message: "Registration failed. Please try again." 
+        res.status(500).json({
+            message: "Registration failed. Please try again."
         });
     }
 });
