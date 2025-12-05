@@ -18,6 +18,7 @@ const port = (() => {
     return num;
 })();
 
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 const express = require("express");
 require('dotenv').config() // load JWT_SECRET
 const app = express();
@@ -31,7 +32,7 @@ try {
 }
 
 app.use(cors({
-    origin: '*',
+    origin: FRONTEND_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
