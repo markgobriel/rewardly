@@ -38,7 +38,7 @@ Rewardly supports multiple transaction types and audit-friendly rules (e.g., tra
 
 ## 🧱 Tech Stack  
 **Frontend**
-- React + Vite + Tailwind CSS  
+- React + Vite
 - Axios for API calls  
 
 **Backend**
